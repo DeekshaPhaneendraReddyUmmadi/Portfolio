@@ -50,6 +50,13 @@ body {
     transition: background 0.3s, color 0.3s;
 }
 
+/* form submit message */
+.success-message {
+    display: none;
+    margin-top: 15px;
+    text-align: center;
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
     position: fixed;
@@ -339,10 +346,6 @@ h2 {
     border-radius: 1rem;
     transition: transform 0.5s;
 }
-
-/* .project img:hover {
-    transform: scale(1.05); 
-} */
 
 .project .overlay {
     position: absolute;

@@ -127,11 +127,25 @@ setInterval(() => {
 }, 10000);
 
 // Form submission
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    console.log('Form submitted:', Object.fromEntries(formData));
-    alert('Message sent! Thank you for reaching out. I\'ll get back to you soon.');
-    form.reset();
-});
+document.getElementById('contactForm').onsubmit = function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Create a FormData object to gather the form data
+    var formData = new FormData(this);
+
+    // Send the data to Google Forms using fetch
+    fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSfHXlrZoXJx4LnEo6P76TmymjIRbbVusjWtV8nbanMO6kl-_A/formResponse', { // Replace with your actual form action URL
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Use no-cors mode to avoid CORS issues
+    })
+    .then(response => {
+        // Show success message
+        document.getElementById('successMessage').style.display = 'block';
+        // Optionally, reset the form
+        this.reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+};
